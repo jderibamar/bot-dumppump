@@ -1,0 +1,195 @@
+<mat-toolbar color="primary">
+    <span> BOT que monitora PUMPS/DUMPS com porcentagem superior a 50% nos últimos 6 meses - Analista: Ellen Duarte </span>
+    <!-- <span id="total_ativos"> Total de ativos: {{ total_ativos }} </span> -->
+    <span class="spacer"></span>
+  </mat-toolbar>
+  
+    <div class="form">
+       <mat-form-field floatPlaceholder="never" color="accent">
+         <input matInput #filter placeholder="Pesquisar aqui...">
+       </mat-form-field>
+    </div>
+  
+      <mat-tab-group>
+          <mat-tab label="PUMP">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-cell" >
+  
+              <ng-container matColumnDef="moeda">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Moeda
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.s}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="exc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Exchange
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.exc}} </td>
+              </ng-container>
+        
+              <!-- Exchange -->
+              <ng-container matColumnDef="high">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                  Maior preço
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.h}} </td>
+              </ng-container>
+        
+              <!-- Menor preço -->
+              <ng-container matColumnDef="low">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                    Menor preço
+                </th>
+                  <td mat-cell *matCellDef="let el"> {{el.l}} </td>
+              </ng-container>
+        
+              <!-- Data -->
+              <!-- <ng-container matColumnDef="data">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                  Data
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.d}} </td>
+              </ng-container> -->
+        
+              <!-- Número de vezes que ocorreu o PUMP -->
+              <ng-container matColumnDef="ocorrencias">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                   Total Pumps
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.cont}} </td>
+              </ng-container>
+                
+              <!-- Variação percentual -->
+              <ng-container matColumnDef="percentual">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+                  Variação em %
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.perc}} </td>
+              </ng-container>
+        
+                  
+              <tr mat-header-row *matHeaderRowDef="colunasPump"></tr>
+              <tr mat-row *matRowDef="let row; columns: colunasPump;"></tr>
+            </table>
+          </mat-tab>
+  
+          <mat-tab label="DUMP">
+            <table mat-table [dataSource]="dataSourceDump" matSort class="mat-cell" >
+  
+              <ng-container matColumnDef="moeda">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Moeda
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.s}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="exc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Exchange
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.exc}} </td>
+              </ng-container>
+        
+              <!-- Exchange -->
+              <ng-container matColumnDef="high">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                  Maior preço
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.h}} </td>
+              </ng-container>
+        
+              <!-- Menor preço -->
+              <ng-container matColumnDef="low">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                    Menor preço
+                </th>
+                  <td mat-cell *matCellDef="let el"> {{el.l}} </td>
+              </ng-container>
+        
+             
+              <!-- Número de vezes que ocorreu o PUMP -->
+              <ng-container matColumnDef="ocorrencias">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                   Total Dumps
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.cont}} </td>
+              </ng-container>
+                
+              <!-- Variação percentual -->
+              <ng-container matColumnDef="percentual">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+                  Variação em %
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.perc}} </td>
+              </ng-container>
+        
+                  
+              <tr mat-header-row *matHeaderRowDef="colunasDump"></tr>
+              <tr mat-row *matRowDef="let row; columns: colunasDump;"></tr>
+            </table>
+          </mat-tab>
+
+          <!-- DUMPS DA MEXC -->
+          <mat-tab label="DUMPS-MEXC">
+            <table mat-table [dataSource]="dataSourceDump" matSort class="mat-cell" >
+  
+              <ng-container matColumnDef="moeda">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Moeda
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.s}} </td>
+              </ng-container>
+        
+              <ng-container matColumnDef="exc">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name">
+                  Exchange
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.exc}} </td>
+              </ng-container>
+        
+              <!-- Exchange -->
+              <ng-container matColumnDef="high">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                  Maior preço
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.h}} </td>
+              </ng-container>
+        
+              <!-- Menor preço -->
+              <ng-container matColumnDef="low">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                    Menor preço
+                </th>
+                  <td mat-cell *matCellDef="let el"> {{el.l}} </td>
+              </ng-container>
+        
+             
+              <!-- Número de vezes que ocorreu o PUMP -->
+              <ng-container matColumnDef="ocorrencias">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight">
+                   Total Dumps
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.cont}} </td>
+              </ng-container>
+                
+              <!-- Variação percentual -->
+              <ng-container matColumnDef="percentual">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by symbol">
+                  Variação em %
+                </th>
+                <td mat-cell *matCellDef="let el"> {{el.perc}} </td>
+              </ng-container>
+        
+                  
+              <tr mat-header-row *matHeaderRowDef="colsDumpMexc"></tr>
+              <tr mat-row *matRowDef="let row; columns: colsDumpMexc;"></tr>
+            </table>
+          </mat-tab>
+      </mat-tab-group>
+  
+  <!-- Copyright 2022 Google LLC. All Rights Reserved.
+      Use of this source code is governed by an MIT-style license that
+      can be found in the LICENSE file at https://angular.io/license -->
+  
+  
